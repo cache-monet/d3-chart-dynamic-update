@@ -1,0 +1,88 @@
+body {
+	background-color: #111;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+div {
+	margin: 20px auto 0;
+	color: #aaa;
+	font-weight: 100;
+}
+
+#container {
+    width: 800px;    
+    height: 300px;
+}
+
+/* svg {
+	position: absolute;
+	top: 75%;
+	left: 50%;
+    transform: translate(-50%,-50%);
+    overflow-x: scroll;
+} */
+
+/* Lines/Axies */
+.xaxis path, .xaxis line{
+    stroke: #aaa;
+    /* fill: none; */
+    shape-rendering: crispEdges;
+	
+}
+
+.xaxis text {
+    font-family: sans-serif;
+    font-size: 11px;
+    fill: #aaa;
+	overflow: scroll;
+}
+
+.lineChart {
+    fill: none;
+    stroke-width: 1;
+    stroke: #ECEDEC;
+}
+
+
+.node{cursor: pointer;}
+
+.datapoint {
+    fill: #3FBFBF;
+}
+
+.datapoint1 {
+    fill: orange;
+}
+
+.datapoint2 {
+    fill: #BF3FBF;
+}
+
+.d3-tip {
+    line-height: 1;
+    padding: 2px 8px 2px 8px;
+    background: rgba(156, 196, 228, 0.8);
+    color: rgb(0, 0, 0);
+    border-radius: 4px;
+    font-size: 10px;
+    font-family: sans-serif;
+  }
+
+  .navigator {
+      background: transparent;
+  }
+
+  .navigator .lineChart {
+    fill: none;
+    stroke: blanchedalmond;
+    stroke-width: 1px;
+}
+
+.navigator .data {
+    fill: blanchedalmond;
+    stroke-width: 0px;
+}
