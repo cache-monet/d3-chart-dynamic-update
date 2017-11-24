@@ -18,7 +18,7 @@ var mainChart = d3.select('body').select("#container").append('svg')
     .attr('height', h);
 
 var xMax = d3.max(dataset, d => d.x),
-    yMax = d3.max(dataset, d => d.y);
+    yMax = d3.max(dataset, d => d.y),
     xMin = d3.min(dataset, d => d.x),
     yMin= d3.min(dataset, d => d.y);
 
@@ -40,48 +40,34 @@ mainChart.append('g')
     
     .call(XAxis)
     .selectAll("text")
-        .style("text-achor", "end")
-        .attr("x", "-.8em")
-        .attr("y", ".15em")
+        .style("text-achor", "end").attr("x", "-.8em").attr("y", ".15em")
 
 
 function redrawNodes() {
    mainChart.select('.xaxis')
     .call(XAxis)
     .selectAll("text")
-        .style("text-achor", "end")
-        .attr("x", "-.8em")
-        .attr("y", ".15em")
+        .attr("x", "-.8em").attr("y", ".15em").style("text-achor", "end")
     var Nodes = mainChart
 //  reposition existing nodes
         .selectAll('circle').data(dataset)
-            .style('fill', 'white')
-            .attr('class', d =>{return d.y + d.x})
-            .attr('cx', d => xScale(d.x))
-            .attr('cy', d => yScale(d.y))
-            .style('r', 6)
-            .style('stroke-width', 2)
-            .style('fill', 'white');
+            .attr('cx', d => xScale(d.x)).attr('cy', d => yScale(d.y))
+            .style('r', 6).style('stroke-width', 2).style('fill', 'white');
     // add new nodes
     Nodes
         .enter().append('circle')
-            .attr('class', d => d.y)
-            .attr('cx', d => xScale(d.x))
-            .attr('cy', d => yScale(d.y))
-            .style('r', 6)
-            .style('stroke-width', 2)
-            .style('fill', 'red');
-
-  
+            .attr('cx', d => xScale(d.x)).attr('cy', d => yScale(d.y))
+            .style('r', 6).style('stroke-width', 2).style('fill', 'red');
 }
 
 function redrawLabels() {
     // reposition existing labels
     var labels = mainChart
-        .selectAll('text').data(dataset)
-        .attr('x', d => xScale(d.x))
-        .attr('y', d => yScale(d.y) + 15)
+        .selectAll('.labels').data(dataset)
+            .attr('x', d => xScale(d.x))
+            .attr('y', d => yScale(d.y) + 15)
     // add new labels
+    console.log(d=> d.y)
     labels
         .enter().append('text')
             .classed("labels", true)
@@ -92,6 +78,7 @@ function redrawLabels() {
             .attr('fill', "white")
             .text(d => d.y);
 }
+
 var i = 0;    
 function update() {
     var cur = datasetOG[i];
