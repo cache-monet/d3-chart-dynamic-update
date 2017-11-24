@@ -18,6 +18,10 @@ div {
     height: 300px;
 }
 
+.button {
+    display: block;
+    margin: 0 auto;
+}   
 /* svg {
 	position: absolute;
 	top: 75%;
@@ -82,7 +86,7 @@ circle {cursor: pointer;}
     stroke-width: 1px;
 }
 
-.navigator .data {
+.navigator .nav-graph {
     fill: blanchedalmond;
     stroke-width: 0px;
 }

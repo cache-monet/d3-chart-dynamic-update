@@ -6,8 +6,7 @@ datasetOG =[{x:400, y:15, tag: 'datapoint2'}, {x:600, y:4, tag: 'datapoint'}, {x
             {x:1000, y:5, tag: 'datapoint'}, {x:1200, y:5, tag: 'datapoint'}, {x:1400, y:12, tag: 'datapoint'}, 
             {x:1600, y:7, tag: 'datapoint1'}, {x:1800, y:4, tag: 'datapoint1'}, {x:2000, y:6, tag: 'datapoint1'}, {x:2200, y:8, tag: 'datapoint2'}, {x:2400, y:11, tag: 'datapoint1'}, {x:2600, y:4, tag: 'datapoint'}, 
 ],
-dataset = [{x:0, y:10, tag: 'datapoint'}, {x:200, y:2, tag: 'datapoint2'}],
- x = 10;
+dataset = [{x:0, y:10, tag: 'datapoint'}, {x:200, y:2, tag: 'datapoint2'}];
 
 /*create svg element*/
 var mainChart = d3.select('body').select("#container").append('svg')
@@ -51,7 +50,7 @@ var lines = d3.line()
 var path = mainChart.append('path')
 .datum(dataset)
 .classed('lineChart', true)
-.attr('d', lines)
+// .attr('d', lines)
 
 
 /* ToolTip (the floating textbox)*/
@@ -64,14 +63,11 @@ var tool_tip = d3.tip()
         "Kakfa-Offset: <b>" + d.y + "</b> <br/>")
     });
 
-  mainChart.call(tool_tip)
-function redrawNodes() {
-   mainChart.select('.xaxis')
-    .call(XAxis)
-    .selectAll("text")
-        .attr("x", "-.8em").attr("y", ".15em").style("text-achor", "end")
+mainChart.call(tool_tip)
+
+function updateNodes() {
+    //  reposition existing nodes
     var Nodes = nodeGroup
-//  reposition existing nodes
         .selectAll('.nodes').data(dataset)
             .attr('cx', d => xScale(d.x)).attr('cy', d => yScale(d.y))
             .style('r', 6).style('stroke-width', 2).style('fill', 'orange');
@@ -86,7 +82,7 @@ function redrawNodes() {
             .on('mouseout', tool_tip.hide);
 }
 
-function redrawLabels() {
+function updateLabels() {
     // reposition existing labels
     var labels = labelGroup
         .selectAll('.labels').data(dataset)
@@ -98,32 +94,19 @@ function redrawLabels() {
             .attr('x', d => xScale(d.x)).attr('y', d => yScale(d.y) + 15)
             .attr('font-family', "sans-serif").attr('font-size', 10).attr('fill', "white")
             .text(d => d.y);
-    
+}
+
+function updateLines() {
+    // redraws x-axis
+    mainChart.select('.xaxis')
+        .call(XAxis)
+        .selectAll("text")
+            .attr("x", "-.8em").attr("y", ".15em").style("text-achor", "end");
     // redraw lines
     path.attr('d', lines)
 }
-
-// var i = 0;    
-// function update() {
-//     var cur = datasetOG[i];
-//     dataset.push(cur);
-//     if (cur.x > xMax) xMax = cur.x;            
-//     if (cur.y > yMax) yMax = cur.y;            
-//     if (cur.x > xMin) xMin = cur.x;            
-//     if (cur.y > yMin) xMin= cur.y;            
-//     xScale.domain([xMin, xMax ]);
-//     yScale.domain([yMin, yMax]);  
-//     redrawLabels();    
-//     redrawNodes();
-//     updateNav();
-//     i++;
-//     if (i < datasetOG.length) {
-//         setTimeout(update, 2000);
-//     }
-// }
 
 function handleClick() {
         d3.selectAll('circle').style('stroke', 'black')
         d3.select(this).style('stroke', 'white')    
 }
-// update();
