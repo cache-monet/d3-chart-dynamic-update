@@ -48,7 +48,7 @@ div {
 }
 
 
-.node{cursor: pointer;}
+circle {cursor: pointer;}
 
 .datapoint {
     fill: #3FBFBF;
