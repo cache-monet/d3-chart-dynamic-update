@@ -72,12 +72,13 @@ function redrawNodes() {
         .attr("x", "-.8em").attr("y", ".15em").style("text-achor", "end")
     var Nodes = nodeGroup
 //  reposition existing nodes
-        .selectAll('circle').data(dataset)
+        .selectAll('.nodes').data(dataset)
             .attr('cx', d => xScale(d.x)).attr('cy', d => yScale(d.y))
             .style('r', 6).style('stroke-width', 2).style('fill', 'orange');
     // add new nodes
     Nodes
         .enter().append('circle')
+            .classed('nodes', true)
             .attr('cx', d => xScale(d.x)).attr('cy', d => yScale(d.y))
             .style('r', 6).style('stroke-width', 2).style('fill', 'red')
             .on('click', handleClick)
@@ -102,26 +103,27 @@ function redrawLabels() {
     path.attr('d', lines)
 }
 
-var i = 0;    
-function update() {
-    var cur = datasetOG[i];
-    dataset.push(cur);
-    if (cur.x > xMax) xMax = cur.x;            
-    if (cur.y > yMax) yMax = cur.y;            
-    if (cur.x > xMin) xMin = cur.x;            
-    if (cur.y > yMin) xMin= cur.y;            
-    xScale.domain([xMin, xMax ]);
-    yScale.domain([yMin, yMax]);  
-    redrawLabels();    
-    redrawNodes();
-    i++;
-    if (i < datasetOG.length) {
-        setTimeout(update, 2000);
-    }
-}
+// var i = 0;    
+// function update() {
+//     var cur = datasetOG[i];
+//     dataset.push(cur);
+//     if (cur.x > xMax) xMax = cur.x;            
+//     if (cur.y > yMax) yMax = cur.y;            
+//     if (cur.x > xMin) xMin = cur.x;            
+//     if (cur.y > yMin) xMin= cur.y;            
+//     xScale.domain([xMin, xMax ]);
+//     yScale.domain([yMin, yMax]);  
+//     redrawLabels();    
+//     redrawNodes();
+//     updateNav();
+//     i++;
+//     if (i < datasetOG.length) {
+//         setTimeout(update, 2000);
+//     }
+// }
 
 function handleClick() {
         d3.selectAll('circle').style('stroke', 'black')
         d3.select(this).style('stroke', 'white')    
 }
-update();
+// update();
